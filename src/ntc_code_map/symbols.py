@@ -9,7 +9,6 @@ from pathlib import Path
 
 from ntc_code_map.config import ProjectConfig
 
-
 FileRecord = tuple[str, Path, str]
 
 

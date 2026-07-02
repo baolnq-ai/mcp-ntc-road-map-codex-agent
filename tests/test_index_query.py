@@ -1,5 +1,5 @@
-from pathlib import Path
 import sqlite3
+from pathlib import Path
 
 from ntc_code_map.config import create_default_config
 from ntc_code_map.indexer import index_repo, index_status
@@ -16,7 +16,7 @@ def make_repo(tmp_path: Path) -> Path:
     src.mkdir()
 
     (src / "app.py").write_text(
-        '''
+        """
 class UserService:
     def create_user(self, name: str) -> dict:
         return {"name": name}
@@ -24,16 +24,16 @@ class UserService:
 def main() -> None:
     service = UserService()
     service.create_user("bao")
-'''.strip()
+""".strip()
         + "\n",
         encoding="utf-8",
     )
 
     (src / "config.py").write_text(
-        '''
+        """
 def load_settings() -> dict:
     return {"debug": True}
-'''.strip()
+""".strip()
         + "\n",
         encoding="utf-8",
     )

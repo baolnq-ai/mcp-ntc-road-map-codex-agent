@@ -5,7 +5,6 @@ import tomllib
 from dataclasses import dataclass, field
 from pathlib import Path
 
-
 DEFAULT_ROOT_MARKERS = [
     ".git",
     "AGENTS.md",
@@ -168,7 +167,9 @@ def create_default_config(path: str | Path = ".ntc-code-map.toml", name: str | N
     if target.exists():
         return target
 
-    include = '".py", ".ts", ".tsx", ".js", ".jsx", ".go", ".rs", ".java", ".md", ".toml", ".yaml", ".yml", ".json", ".sh"'
+    include = (
+        '".py", ".ts", ".tsx", ".js", ".jsx", ".go", ".rs", ".java", ".md", ".toml", ".yaml", ".yml", ".json", ".sh"'
+    )
     ignore = '".git", "node_modules", "dist", "build", ".venv", "__pycache__", ".cache", ".ntc-code-map"'
     markers = '".git", "AGENTS.md", "pyproject.toml", "package.json", "go.mod", "Cargo.toml"'
 

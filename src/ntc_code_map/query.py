@@ -6,12 +6,35 @@ from pathlib import Path
 from ntc_code_map.config import load_config
 from ntc_code_map.storage import connect, count_files, count_symbols, init_db
 
-
 STOP_WORDS = {
-    "the", "and", "for", "with", "this", "that", "from", "into",
-    "task", "code", "file", "fix", "add", "use", "using", "where",
-    "how", "what", "why", "when", "then", "true", "false",
-    "project", "repo", "source", "class", "function",
+    "the",
+    "and",
+    "for",
+    "with",
+    "this",
+    "that",
+    "from",
+    "into",
+    "task",
+    "code",
+    "file",
+    "fix",
+    "add",
+    "use",
+    "using",
+    "where",
+    "how",
+    "what",
+    "why",
+    "when",
+    "then",
+    "true",
+    "false",
+    "project",
+    "repo",
+    "source",
+    "class",
+    "function",
 }
 
 
@@ -87,10 +110,7 @@ def find_symbols_text(query: str, path: str | Path = ".", limit: int = 30) -> st
     for score, row in scored[:limit]:
         sig = f" :: {row['signature']}" if row["signature"] else ""
         scope = f" scope={row['scope']}" if row["scope"] else ""
-        out.append(
-            f"- score={score:03d} {row['path']}:{row['line']} "
-            f"[{row['kind']}] {row['name']}{scope}{sig}"
-        )
+        out.append(f"- score={score:03d} {row['path']}:{row['line']} [{row['kind']}] {row['name']}{scope}{sig}")
 
     return "\n".join(out) if len(out) > 1 else f"No symbols found for: {query}"
 
@@ -128,9 +148,7 @@ def find_files_text(query: str, path: str | Path = ".", limit: int = 30) -> str:
 
     out = [f"# File search: {query}"]
     for score, row in scored[:limit]:
-        out.append(
-            f"- score={score:03d} size={row['size']:>7} ext={row['ext']} {row['path']}"
-        )
+        out.append(f"- score={score:03d} size={row['size']:>7} ext={row['ext']} {row['path']}")
 
     return "\n".join(out) if len(out) > 1 else f"No files found for: {query}"
 
@@ -184,10 +202,7 @@ def module_map_text(module_path: str, path: str | Path = ".", token_budget: int 
     for row in symbols:
         sig = f" :: {row['signature']}" if row["signature"] else ""
         scope = f" scope={row['scope']}" if row["scope"] else ""
-        out.append(
-            f"- {row['path']}:{row['line']} [{row['kind']}] "
-            f"{row['name']}{scope}{sig}"
-        )
+        out.append(f"- {row['path']}:{row['line']} [{row['kind']}] {row['name']}{scope}{sig}")
 
         if len("\n".join(out)) > max_chars:
             out.append("")
@@ -347,10 +362,7 @@ def repo_map_text(task: str, path: str | Path = ".", token_budget: int = 3500) -
         for sym in file_symbols[:max_symbols]:
             sig = f" :: {sym['signature']}" if sym["signature"] else ""
             scope = f" scope={sym['scope']}" if sym["scope"] else ""
-            out.append(
-                f"- L{sym['line']} [{sym['kind']}] "
-                f"{sym['name']}{scope}{sig}"
-            )
+            out.append(f"- L{sym['line']} [{sym['kind']}] {sym['name']}{scope}{sig}")
 
             if len("\n".join(out)) > max_chars:
                 out.append("")

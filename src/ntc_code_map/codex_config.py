@@ -6,7 +6,6 @@ import shutil
 import time
 from pathlib import Path
 
-
 SERVER_NAME = "ntc_code_map"
 
 
@@ -26,13 +25,13 @@ def resolve_executable(command: str | None = None) -> str:
 
 
 def build_mcp_block(command: str) -> str:
-    return f'''[mcp_servers.{SERVER_NAME}]
+    return f"""[mcp_servers.{SERVER_NAME}]
 command = {json.dumps(command)}
 args = ["serve"]
 startup_timeout_sec = 20
 tool_timeout_sec = 180
 required = true
-'''
+"""
 
 
 def upsert_mcp_block(
@@ -48,9 +47,7 @@ def upsert_mcp_block(
 
     old = path.read_text(encoding="utf-8") if path.exists() else ""
 
-    pattern = re.compile(
-        rf"(?ms)^\[mcp_servers\.{re.escape(SERVER_NAME)}\]\n.*?(?=^\[|\Z)"
-    )
+    pattern = re.compile(rf"(?ms)^\[mcp_servers\.{re.escape(SERVER_NAME)}\]\n.*?(?=^\[|\Z)")
 
     if pattern.search(old):
         new = pattern.sub(block.rstrip() + "\n\n", old).rstrip() + "\n"

@@ -3,7 +3,6 @@ from __future__ import annotations
 import time
 from pathlib import Path
 
-
 MARKER_START = "<!-- ntc-code-map:start -->"
 MARKER_END = "<!-- ntc-code-map:end -->"
 

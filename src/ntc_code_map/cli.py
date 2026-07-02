@@ -9,9 +9,9 @@ from dataclasses import asdict
 from pathlib import Path
 
 from ntc_code_map import __version__
-from ntc_code_map.config import create_default_config, load_config
-from ntc_code_map.codex_config import upsert_mcp_block
 from ntc_code_map.agents import init_agents
+from ntc_code_map.codex_config import upsert_mcp_block
+from ntc_code_map.config import create_default_config, load_config
 from ntc_code_map.indexer import index_repo, index_status
 from ntc_code_map.query import find_files_text, find_symbols_text, module_map_text, repo_map_text
 
@@ -80,17 +80,16 @@ def cmd_module_map(args: argparse.Namespace) -> int:
     return 0
 
 
-
 def cmd_repo_map(args: argparse.Namespace) -> int:
     print(repo_map_text(args.task, path=args.path, token_budget=args.token_budget))
     return 0
-
 
 
 def cmd_init_agents(args: argparse.Namespace) -> int:
     result = init_agents(args.path, dry_run=args.dry_run)
     print_json(result)
     return 0
+
 
 def cmd_init_codex(args: argparse.Namespace) -> int:
     result = upsert_mcp_block(
@@ -100,6 +99,7 @@ def cmd_init_codex(args: argparse.Namespace) -> int:
     )
     print_json(result)
     return 0
+
 
 def cmd_doctor(args: argparse.Namespace) -> int:
     cfg = load_config(args.path)
@@ -189,13 +189,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_module_map.add_argument("--token-budget", type=int, default=2500)
     p_module_map.set_defaults(func=cmd_module_map)
 
-
     p_repo_map = sub.add_parser("repo-map", help="Create compact task-aware repository map")
     p_repo_map.add_argument("task")
     p_repo_map.add_argument("--path", default=".")
     p_repo_map.add_argument("--token-budget", type=int, default=3500)
     p_repo_map.set_defaults(func=cmd_repo_map)
-
 
     p_init_agents = sub.add_parser("init-agents", help="Create/update AGENTS.md with ntc-code-map workflow")
     p_init_agents.add_argument("path", nargs="?", default=".")

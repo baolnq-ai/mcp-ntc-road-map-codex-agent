@@ -74,10 +74,7 @@ def iter_source_files(cfg: ProjectConfig) -> Iterable[Path]:
     for dirpath, dirnames, filenames in os.walk(cfg.root):
         current = Path(dirpath)
 
-        dirnames[:] = [
-            name for name in dirnames
-            if name not in ignore_dirs and not name.startswith(".ntc-code-map")
-        ]
+        dirnames[:] = [name for name in dirnames if name not in ignore_dirs and not name.startswith(".ntc-code-map")]
 
         if is_ignored(current, cfg):
             continue

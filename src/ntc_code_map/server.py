@@ -13,7 +13,6 @@ from ntc_code_map.query import (
     repo_map_text,
 )
 
-
 INSTRUCTIONS = """
 Use ntc-code-map before reading source files.
 
