@@ -168,14 +168,18 @@ def create_default_config(path: str | Path = ".ntc-code-map.toml", name: str | N
     if target.exists():
         return target
 
+    include = '".py", ".ts", ".tsx", ".js", ".jsx", ".go", ".rs", ".java", ".md", ".toml", ".yaml", ".yml", ".json", ".sh"'
+    ignore = '".git", "node_modules", "dist", "build", ".venv", "__pycache__", ".cache", ".ntc-code-map"'
+    markers = '".git", "AGENTS.md", "pyproject.toml", "package.json", "go.mod", "Cargo.toml"'
+
     target.write_text(
         f'''[project]
 name = "{project_name}"
-root_markers = [".git", "AGENTS.md", "pyproject.toml", "package.json", "go.mod", "Cargo.toml"]
+root_markers = [{markers}]
 
 [index]
-include_exts = [".py", ".ts", ".tsx", ".js", ".jsx", ".go", ".rs", ".java", ".md", ".toml", ".yaml", ".yml", ".json", ".sh"]
-ignore_dirs = [".git", "node_modules", "dist", "build", ".venv", "__pycache__", ".cache", ".ntc-code-map"]
+include_exts = [{include}]
+ignore_dirs = [{ignore}]
 max_file_bytes = 700000
 
 [ranking]

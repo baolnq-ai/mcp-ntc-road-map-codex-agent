@@ -119,9 +119,17 @@ def _patterns_for_ext(ext: str) -> list[tuple[str, str]]:
         ]
 
     if ext in {".java", ".kt", ".kts", ".cs"}:
+        class_pat = (
+            r"^\s*(?:public|private|protected|internal|open|final|abstract|sealed|\s)*"
+            r"(?:class|interface|enum|record)\s+([A-Za-z_][A-Za-z0-9_]*)"
+        )
+        method_pat = (
+            r"^\s*(?:public|private|protected|internal|static|final|async|override|\s)+"
+            r"[A-Za-z0-9_<>\[\],?]+\s+([A-Za-z_][A-Za-z0-9_]*)\s*\("
+        )
         return [
-            ("class", r"^\s*(?:public|private|protected|internal|open|final|abstract|sealed|\s)*(?:class|interface|enum|record)\s+([A-Za-z_][A-Za-z0-9_]*)"),
-            ("method", r"^\s*(?:public|private|protected|internal|static|final|async|override|\s)+[A-Za-z0-9_<>\[\],?]+\s+([A-Za-z_][A-Za-z0-9_]*)\s*\("),
+            ("class", class_pat),
+            ("method", method_pat),
         ]
 
     if ext == ".go":
