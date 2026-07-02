@@ -4,7 +4,7 @@
 
 ```bash
 # Install the package
-pip install ntc-code-map
+pip install mcp-ntc-road-map-codex-agent
 
 # Auto-configure Codex to use ntc-code-map as an MCP server
 ntc-code-map init-codex

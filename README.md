@@ -19,7 +19,7 @@ LLM coding agents waste tokens on broad `grep`, `find`, and full-file reads to o
 ### 1. Install
 
 ```bash
-pip install ntc-code-map
+pip install mcp-ntc-road-map-codex-agent
 ```
 
 ### 2. Initialize in your project
