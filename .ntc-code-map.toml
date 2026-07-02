@@ -1,0 +1,13 @@
+[project]
+name = "ntc-code-map"
+root_markers = [".git", "AGENTS.md", "pyproject.toml", "package.json", "go.mod", "Cargo.toml"]
+
+[index]
+include_exts = [".py", ".ts", ".tsx", ".js", ".jsx", ".go", ".rs", ".java", ".md", ".toml", ".yaml", ".yml", ".json", ".sh"]
+ignore_dirs = [".git", "node_modules", "dist", "build", ".venv", "__pycache__", ".cache", ".ntc-code-map"]
+max_file_bytes = 700000
+
+[ranking]
+default_token_budget = 3500
+max_files = 80
+max_symbols_per_file = 24

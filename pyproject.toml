@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ntc-code-map"
+version = "0.1.0"
+description = "Portable MCP code-map server for token-efficient coding agents"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "NTC AI" }
+]
+dependencies = [
+  "mcp>=1.0.0"
+]
+
+[project.scripts]
+ntc-code-map = "ntc_code_map.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+keywords = [
+    "mcp",
+    "agent",
+    "code-map",
+    "codex",
+    "llm",
+    "developer-tools"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries",
+]
